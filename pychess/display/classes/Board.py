@@ -61,7 +61,7 @@ class Board:
         """
         Pygame Event Handler for when user clicks the board. 
         
-        Calls the ChessLogic play_move function if a move has been parsed
+        Calls the ChessLogic play_move function if a move has been parsed.
 
         Args:
             mx (int): Absolute x coordinate of click
@@ -70,15 +70,25 @@ class Board:
         x = mx // self.tile_width
         y = my // self.tile_height
         clicked_square = self.get_square_from_pos((x, y))
+
         if clicked_square is not None:
+            print(f"Clicked on: {clicked_square.get_coord()}")  # Debugging Output
             if self.start_pos == "":
                 self.start_pos = clicked_square.get_coord()
+                print(f"Start Position Set: {self.start_pos}")  # Debugging Output
             elif self.end_pos == "":
                 self.end_pos = clicked_square.get_coord()
+                print(f"End Position Set: {self.end_pos}")  # Debugging Output
+
                 if self.start_pos != self.end_pos:
-                    self.logic.play_move(f"{self.start_pos}{self.end_pos}")
+                    move_string = f"{self.start_pos}{self.end_pos}"
+                    print(f"Attempting Move: {move_string}")  # Debugging Output
+                    self.logic.play_move(move_string)  # Send move to ChessLogic
+
+                # Reset for next move input
                 self.start_pos = ""
                 self.end_pos = ""
+
     
     def draw(self, display, font):
         """
