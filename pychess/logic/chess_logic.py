@@ -151,8 +151,7 @@ class ChessLogic:
             print("Stalemate! The game is a draw.")
             return move
         
-        self.move_history.append(move)
-
+        return move 
 
 
 
@@ -383,7 +382,3 @@ class ChessLogic:
                                 if not still_in_check:
                                     return False  # Legal move exists
         return True  # No legal moves and not in check
-
-    def print_move_history(self):
-        for i, move in enumerate(self.move_history, 1):
-            print(f"{i}. {move}")
